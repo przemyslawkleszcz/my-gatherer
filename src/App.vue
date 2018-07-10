@@ -2,7 +2,20 @@
   <div class="page-container">
     <md-app>
       <md-app-toolbar class="md-primary">
-        <span class="md-title">My Title</span>
+        <div class="md-toolbar-row">
+          <div class="md-toolbar-section-start">
+            <span class="md-title">My Title</span>
+          </div>
+          <div class="md-toolbar-section-end">
+            <md-button style="float:right;" v-show="isLoggedIn()" @click="handleLogout()">
+              Log out
+            </md-button>
+
+            <md-button style="text-align: right;" v-show="!isLoggedIn()" @click="handleLogin()">
+              Log In
+            </md-button>
+          </div>
+        </div>
       </md-app-toolbar>
       <md-app-drawer md-permanent="full">
         <md-toolbar class="md-transparent" md-elevation="0">
@@ -17,14 +30,14 @@
             </router-link>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item v-if="isLoggedIn()">
             <router-link to="/Editions" exact>
               <md-icon>move_to_inbox</md-icon>
               Editions
             </router-link>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item v-if="isLoggedIn()">
             <router-link to="/Database" exact>
               <md-icon>move_to_inbox</md-icon>
               Database
@@ -54,8 +67,22 @@
     max-width: calc(100vw - 125px);
   }
 </style>
+
 <script>
+  import { isLoggedIn, login, logout } from '../utils/auth';
+
   export default {
-    name: 'Normal'
+    name: 'Normal',
+    methods: {
+      handleLogin() {
+        login();
+      },
+      handleLogout() {
+        logout();
+      },
+      isLoggedIn() {
+        return isLoggedIn();
+      },
+    }
   }
 </script>
