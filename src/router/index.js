@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Editions from '@/components/Editions'
 import Database from '@/components/Database'
+import Inventory from '@/components/Inventory'
 import Callback from '@/components/callback';
 import { requireAuth } from '../../utils/auth';
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/Database',
       name: 'Database',
       component: Database
+    },
+    {
+      path: '/Inventory',
+      name: 'Inventory',
+      component: Inventory
     },
     {
       path: '/callback',

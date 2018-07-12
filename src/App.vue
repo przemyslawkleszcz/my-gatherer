@@ -44,6 +44,17 @@
             </router-link>
           </md-list-item>
 
+          <md-toolbar class="md-transparent" md-elevation="0">
+            MTG Collection
+          </md-toolbar>
+
+          <md-list-item v-if="isLoggedIn()">
+            <router-link to="/Inventory" exact>
+              <md-icon>move_to_inbox</md-icon>
+              Inventory
+            </router-link>
+          </md-list-item>
+
         </md-list>
       </md-app-drawer>
       <md-app-content>
@@ -69,7 +80,7 @@
 </style>
 
 <script>
-  import { isLoggedIn, login, logout } from '../utils/auth';
+  import { isLoggedIn, login, logout, getAccessToken } from '../utils/auth';
 
   export default {
     name: 'Normal',

@@ -2,9 +2,15 @@
   <div>
     <div class="md-layout md-gutter">
       <div class="md-layout-item">
-        <md-autocomplete v-model="currentSet" :md-options="setNames" @md-selected="getCards" md-input-placeholder="Type here...">
-          <label>Set</label>
-        </md-autocomplete>
+        <autocomplete source="https://api.magicthegathering.io/v1/sets?name="
+                      ref="autocomplete"
+                      placeholder="Search sets"
+                      results-property="sets"
+                      results-display="name"
+                      resultsValue="code"
+                      @selected="selected"
+                      style="width: 300px; height: 80px;">
+        </autocomplete>
       </div>
     </div>
 
@@ -28,37 +34,22 @@
 <script>
   const mtg = require('mtgsdk')
   import Mana from '@/components/Mana'
+  import Autocomplete from 'vuejs-auto-complete'
 
   export default {
-    name: 'EditionsGrid', created() {
-      this.getSets();
-    },
+    name: 'EditionsGrid',
     components: {
-      Mana
+      Mana,
+      Autocomplete
     },
-    methods: {      
+    methods: {
       getCardTooltip(image) {
         return "<img src='" + image + "'/>";
       },
-      getSets() {
-        this.sets = [];
-        this.setNames = [];
-
-        mtg.set.all()
-          .on("data", set => {
-            this.setNames.push(set.name)
-            this.sets.push({ name: set.name, code: set.code })
-          });
-      },
-      getCards() {
+      selected(result) {
         this.cards = [];
 
-        if (this.currentSet == null || this.currentSet == "")
-          return;
-
-        var set = this.sets.filter(x => x.name == this.currentSet)[0];
-
-        mtg.card.all({ set: set.code })
+        mtg.card.all({ set: result.value })
           .on("data", card => {
             this.cards.push({
               name: card.name,
@@ -72,10 +63,7 @@
     },
     data() {
       return {
-        cards: [],
-        setNames: [],
-        sets: [],
-        currentSet: null
+        cards: []
       }
     }
   }
