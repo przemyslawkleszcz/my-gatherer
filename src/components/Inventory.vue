@@ -21,10 +21,10 @@
 
       <md-table-row v-for="card in cards">
         <md-table-cell>
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" @click="remove(card.id)">
             <md-icon>remove</md-icon>
           </md-button>
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" @click="add(card.id)">
             <md-icon>add</md-icon>
           </md-button>
         </md-table-cell>
@@ -66,6 +66,7 @@
   export default {
     name: 'Inventory',
     created() {
+      axios.defaults.headers.common['Authorization'] = 'bearer ' + getAccessToken();
       this.getCards();
     },
     components: {
@@ -73,6 +74,22 @@
       Autocomplete
     },
     methods: {
+      remove(id) {
+        axios.delete('http://localhost:58990/api/cards/' + id).then(response => {
+          console.log(response);
+          this.getCards();
+        }).catch(function (error) {
+          console.log(error);
+        });
+      },
+      add(id) {
+        axios.put('http://localhost:58990/api/cards/' + id).then(response => {
+          console.log(response);
+          this.getCards();
+        }).catch(function (error) {
+          console.log(error);
+        });
+      },
       selected(result) {
         console.log(result);
         var autocomplete = this.$refs.autocomplete;
@@ -107,7 +124,6 @@
       },
       getCards() {
         this.cards = [];
-        axios.defaults.headers.common['Authorization'] = 'bearer ' + getAccessToken();
         axios.get('http://localhost:58990/api/cards')
           .then(response => {
             for (var i = 0; i < response.data.length; i++)

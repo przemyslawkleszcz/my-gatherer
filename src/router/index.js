@@ -31,7 +31,6 @@ export default new Router({
     {
       path: '/Editions',
       name: 'Editions',
-      beforeEnter: requireAuth,
       component: Editions
     },
     {
@@ -42,6 +41,7 @@ export default new Router({
     {
       path: '/Inventory',
       name: 'Inventory',
+      beforeEnter: requireAuth,
       component: Inventory
     },
     {

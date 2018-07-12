@@ -61,7 +61,6 @@ function clearIdToken() {
 
 function clearAccessToken() {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
-  axios.defaults.headers.common['Authorization'] = '';
 }
 
 // Helper function that will allow us to extract the access_token and id_token
@@ -74,8 +73,6 @@ function getParameterByName(name) {
 export function setAccessToken() {
   let accessToken = getParameterByName('access_token');
   localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-  alert(accessToken);
-  axios.defaults.headers.common['Authorization'] = 'bearer ' + accessToken;
 }
 
 // Get and store id_token in local storage

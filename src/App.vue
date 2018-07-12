@@ -30,14 +30,14 @@
             </router-link>
           </md-list-item>
 
-          <md-list-item v-if="isLoggedIn()">
+          <md-list-item>
             <router-link to="/Editions" exact>
               <md-icon>move_to_inbox</md-icon>
               Editions
             </router-link>
           </md-list-item>
 
-          <md-list-item v-if="isLoggedIn()">
+          <md-list-item>
             <router-link to="/Database" exact>
               <md-icon>move_to_inbox</md-icon>
               Database
