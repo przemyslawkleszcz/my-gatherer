@@ -14,7 +14,7 @@ namespace my_gatherer_api.Data
         public DbSet<CardItem> CardItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        { 
             base.OnModelCreating(modelBuilder);
             Card.OnModelCreating(modelBuilder);
             CardItem.OnModelCreating(modelBuilder);
