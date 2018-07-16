@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "my-gatherer", ".", "{40CBD9B6-DE52-41EF-849A-52863D39DDFA}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_52757"
+		Debug.AspNetCompiler.PhysicalPath = "..\my-gatherer\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52757\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_52757"
+		Release.AspNetCompiler.PhysicalPath = "..\my-gatherer\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52757\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "52757"
+		SlnRelativePath = "..\my-gatherer\"
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "my-gatherer-api", "api\my-gatherer-api.csproj", "{233FD3EA-5819-4820-882B-87B20FEBABD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40CBD9B6-DE52-41EF-849A-52863D39DDFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CBD9B6-DE52-41EF-849A-52863D39DDFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40CBD9B6-DE52-41EF-849A-52863D39DDFA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CBD9B6-DE52-41EF-849A-52863D39DDFA}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{233FD3EA-5819-4820-882B-87B20FEBABD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233FD3EA-5819-4820-882B-87B20FEBABD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233FD3EA-5819-4820-882B-87B20FEBABD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233FD3EA-5819-4820-882B-87B20FEBABD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54E2921F-E1DD-41B8-A7D1-3B94D6B213BA}
+	EndGlobalSection
+EndGlobal

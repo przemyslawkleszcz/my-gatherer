@@ -1,0 +1,11 @@
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\bin\Release\netcoreapp2.0\my-gatherer-api.deps.json
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\bin\Release\netcoreapp2.0\my-gatherer-api.runtimeconfig.json
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\bin\Release\netcoreapp2.0\my-gatherer-api.runtimeconfig.dev.json
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\bin\Release\netcoreapp2.0\my-gatherer-api.dll
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\bin\Release\netcoreapp2.0\my-gatherer-api.pdb
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\obj\Release\netcoreapp2.0\my-gatherer-api.csprojResolveAssemblyReference.cache
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\obj\Release\netcoreapp2.0\my-gatherer-api.csproj.CoreCompileInputs.cache
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\obj\Release\netcoreapp2.0\my-gatherer-api.AssemblyInfoInputs.cache
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\obj\Release\netcoreapp2.0\my-gatherer-api.AssemblyInfo.cs
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\obj\Release\netcoreapp2.0\my-gatherer-api.dll
+D:\Projects\my-gatherer-api\my-gatherer-api\my-gatherer-api\obj\Release\netcoreapp2.0\my-gatherer-api.pdb
