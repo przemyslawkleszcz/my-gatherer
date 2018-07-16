@@ -107,27 +107,12 @@
       getCardTooltip(image) {
         return "<img src='" + image + "'/>";
       },
-      fillCard(elem) {
-        mtg.card.where({ id: elem.id })
-          .then(card => {
-            this.cards.push({
-              id: card[0].id,
-              name: card[0].name,
-              manaCost: card[0].manaCost,
-              quantity: elem.quantity,
-              setName: card[0].setName,
-              imageUrl: card[0].imageUrl == null
-                ? ""
-                : card[0].imageUrl
-            });
-          });
-      },
       getCards() {
         this.cards = [];
         axios.get('http://localhost:58990/api/cards')
           .then(response => {
             for (var i = 0; i < response.data.length; i++)
-              this.fillCard(response.data[i]);
+              this.cards.push(response.data[i]);
           })
           .catch(function (error) {
             console.log(error);
