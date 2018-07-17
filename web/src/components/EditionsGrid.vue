@@ -11,7 +11,7 @@
                       @selected="selected"
                       style="width: 300px; height: 80px;">
         </autocomplete>
-        <span>In collection: <span style="color: #7ed875;">{{cardsInCollection}}</span> / {{cardsCount}}</span>
+        <span>In collection: <span style="color: #7ed875;">{{inInventory}}</span> / {{count}}</span>
       </div>
     </div>
 
@@ -22,7 +22,7 @@
         <md-table-head>Mana cost</md-table-head>
       </md-table-row>
 
-      <md-table-row v-for="(card, index) in cards" v-bind:class="[card.inCollection == true ? 'inCollection' : '']">
+      <md-table-row v-for="(card, index) in cards" v-bind:class="[card.inInventory == true ? 'inCollection' : '']">
         <md-table-cell>
           #{{index+1}}
         </md-table-cell>
@@ -53,21 +53,10 @@
     name: 'EditionsGrid',
     created() {
       axios.defaults.headers.common['Authorization'] = 'bearer ' + getAccessToken();
-      this.getInventoryCards();
     },
     components: {
       Mana,
       Autocomplete
-    },
-    computed: {
-      cardsInCollection() {
-        return this.cards.filter((item) => {
-          return this.inventory.includes(item.id);
-        }).length;
-      },
-      cardsCount() {
-        return this.cards.length;
-      }
     },
     methods: {
       getCardTooltip(image) {
@@ -76,25 +65,13 @@
       selected(result) {
         this.cards = [];
 
-        mtg.card.all({ set: result.value })
-          .on("data", card => {
-            this.cards.push({
-              id: card.id,
-              name: card.name,
-              manaCost: card.manaCost,
-              inCollection: this.inventory.includes(card.id),
-              imageUrl: card.imageUrl == null
-                ? ""
-                : card.imageUrl
-            });
-          });
-      },
-      getInventoryCards() {
-        this.inventory = [];
-        axios.get('http://localhost:58990/api/cards')
+        axios.get('http://localhost:58990/api/cards?set=' + result.value)
           .then(response => {
-            for (var i = 0; i < response.data.length; i++)
-              this.inventory.push(response.data[i].id)
+            this.count = response.data.count;
+            this.inInventory = response.data.inInventory;
+
+            for (var i = 0; i < response.data.items.length; i++)
+              this.cards.push(response.data.items[i]);
           })
           .catch(function (error) {
             console.log(error);
@@ -104,7 +81,8 @@
     data() {
       return {
         cards: [],
-        inventory: []
+        count: 0,
+        inInventory: 0
       }
     }
   }

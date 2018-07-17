@@ -80,7 +80,7 @@
     },
     methods: {
       remove(id) {
-        axios.delete('http://localhost:58990/api/cards/' + id).then(response => {
+        axios.delete('http://localhost:58990/api/inventory/' + id).then(response => {
           console.log(response);
           this.getCards();
         }).catch(function (error) {
@@ -88,7 +88,7 @@
         });
       },
       add(id) {
-        axios.put('http://localhost:58990/api/cards/' + id).then(response => {
+        axios.put('http://localhost:58990/api/inventory/' + id).then(response => {
           console.log(response);
           this.getCards();
         }).catch(function (error) {
@@ -98,7 +98,7 @@
       selected(result) {
         console.log(result);
         var autocomplete = this.$refs.autocomplete;
-        axios.put('http://localhost:58990/api/cards/' + result.value).then(response => {
+        axios.put('http://localhost:58990/api/inventory/' + result.value).then(response => {
           console.log(response);
           this.getCards();
           autocomplete.clearValues();
@@ -114,7 +114,7 @@
       },
       getCards() {
         this.cards = [];
-        axios.get('http://localhost:58990/api/cards')
+        axios.get('http://localhost:58990/api/inventory')
           .then(response => {
             for (var i = 0; i < response.data.length; i++)
               this.cards.push(response.data[i]);

@@ -10,13 +10,13 @@ namespace my_gatherer_api.Data
         {
             
         }
-        public DbSet<Card> Cards { get; set; }
+        public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<CardItem> CardItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             base.OnModelCreating(modelBuilder);
-            Card.OnModelCreating(modelBuilder);
+            InventoryItem.OnModelCreating(modelBuilder);
             CardItem.OnModelCreating(modelBuilder);
         }
     }

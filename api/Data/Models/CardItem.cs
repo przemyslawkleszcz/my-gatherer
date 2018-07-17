@@ -13,7 +13,7 @@ namespace my_gatherer_api.Data.Models
         public string ManaCost { get; set; }
         public string SetName { get; set; }
         public string ImageUrl { get; set; }
-        public ICollection<Card> Cards { get; set; }
+        public ICollection<InventoryItem> InventoryItems { get; set; }
 
         public static void OnModelCreating(ModelBuilder modelBuilder)
         {
