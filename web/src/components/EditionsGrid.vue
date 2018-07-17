@@ -40,6 +40,10 @@
   .inCollection {
     background-color: #7ed875;
   }
+
+  .autocomplete__box {
+    height: 40px !important;
+  }
 </style>
 
 <script>
