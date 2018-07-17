@@ -9,7 +9,7 @@
                   @selected="selected"
                   style="width: 300px; height: 80px;">
     </autocomplete>
-
+    <span>Cards count: {{cardsCount}}</span>
     <md-table>
       <md-table-row>
         <md-table-head></md-table-head>
@@ -72,6 +72,11 @@
     components: {
       Mana,
       Autocomplete
+    },
+    computed: {
+      cardsCount() {
+        return this.cards.length;
+      }
     },
     methods: {
       remove(id) {
