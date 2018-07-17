@@ -17,11 +17,15 @@
 
     <md-table>
       <md-table-row>
+        <md-table-head></md-table-head>
         <md-table-head>Name</md-table-head>
         <md-table-head>Mana cost</md-table-head>
       </md-table-row>
 
-      <md-table-row v-for="card in cards" v-bind:class="[card.inCollection == true ? 'inCollection' : '']">
+      <md-table-row v-for="(card, index) in cards" v-bind:class="[card.inCollection == true ? 'inCollection' : '']">
+        <md-table-cell>
+          #{{index+1}}
+        </md-table-cell>
         <md-table-cell v-tooltip.top-center="{content: getCardTooltip(card.imageUrl)}">{{card.name}}</md-table-cell>
         <md-table-cell>
           <mana :manaCost="card.manaCost"></mana>
