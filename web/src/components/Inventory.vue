@@ -77,28 +77,29 @@
     methods: {
       remove(id) {
         axios.delete(process.env.API_URL + '/api/inventory/' + id).then(response => {
-          console.log(response);
           this.getCards();
-        }).catch(function (error) {
+        }).catch((error) => {
           console.log(error);
         });
       },
       add(id) {
         axios.put(process.env.API_URL + '/api/inventory/' + id).then(response => {
-          console.log(response);
           this.getCards();
-        }).catch(function (error) {
+        }).catch((error) => {
           console.log(error);
         });
       },
+      focus(autocomplete) {
+        var input = autocomplete.$el.children[0].children[1].children[0];
+        input.focus();
+      },
       selected(result) {
-        console.log(result);
         var autocomplete = this.$refs.autocomplete;
         axios.put(process.env.API_URL + '/api/inventory/' + result.value).then(response => {
-          console.log(response);
           this.getCards();
           autocomplete.clearValues();
-        }).catch(function (error) {
+          this.focus(autocomplete);
+        }).catch((error) => {
           console.log(error);
         });
       },
@@ -114,11 +115,10 @@
           .then(response => {
             this.cardsCount = response.data.count;
             this.cardsDistinctCount = response.data.distinctCount;
-
             for (var i = 0; i < response.data.items.length; i++)
               this.cards.push(response.data.items[i]);
           })
-          .catch(function (error) {
+          .catch((error) => {
             console.log(error);
           });
       }
