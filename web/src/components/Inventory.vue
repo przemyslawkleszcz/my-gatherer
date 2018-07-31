@@ -1,7 +1,8 @@
 <template>
   <div>
     <h3>Inventory</h3>
-    <autocomplete source="https://api.magicthegathering.io/v1/cards?name="
+    <span><i>Syntax: Card Name [Set name]</i></span>
+    <autocomplete :source="distributionGroupsEndpoint"
                   ref="autocomplete"
                   placeholder="Add cards"
                   results-property="cards"
@@ -92,6 +93,20 @@
       focus(autocomplete) {
         var input = autocomplete.$el.children[0].children[1].children[0];
         input.focus();
+      },
+      distributionGroupsEndpoint(inputText) {
+        //modify here to prevent doing many requests
+        var url = "https://api.magicthegathering.io/v1/cards?name=";
+        var matches = inputText.match(/\[(.*?)\]/);
+        if (matches != null) {
+          inputText = inputText.replace(matches[0], "");
+          url += inputText.trim();
+          url += "&setName=" + matches[1];
+        }
+        else
+          url += inputText;
+
+        return url;
       },
       selected(result) {
         var autocomplete = this.$refs.autocomplete;
