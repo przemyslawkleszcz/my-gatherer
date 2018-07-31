@@ -4,7 +4,7 @@
       <md-app-toolbar class="md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <span class="md-title">My Title</span>
+            <span class="md-title"><img style="width:40px; height: 40px;" src="./assets/img/logo.png"></span>
           </div>
           <div class="md-toolbar-section-end">
             <md-button style="float:right;" v-show="isLoggedIn()" @click="handleLogout()">
