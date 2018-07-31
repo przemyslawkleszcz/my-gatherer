@@ -9,7 +9,8 @@
                   @selected="selected"
                   style="width: 300px; height: 80px;">
     </autocomplete>
-    <span>Cards count: {{cardsCount}}</span>
+    <div>Cards count: {{cardsCount}}</div>
+    <div>Distinct count: {{cardsDistinctCount}}</div>
     <md-table>
       <md-table-row>
         <md-table-head></md-table-head>
@@ -73,14 +74,9 @@
       Mana,
       Autocomplete
     },
-    computed: {
-      cardsCount() {
-        return this.cards.length;
-      }
-    },
     methods: {
       remove(id) {
-        axios.delete('http://localhost:58990/api/inventory/' + id).then(response => {
+        axios.delete(process.env.API_URL + '/api/inventory/' + id).then(response => {
           console.log(response);
           this.getCards();
         }).catch(function (error) {
@@ -88,7 +84,7 @@
         });
       },
       add(id) {
-        axios.put('http://localhost:58990/api/inventory/' + id).then(response => {
+        axios.put(process.env.API_URL + '/api/inventory/' + id).then(response => {
           console.log(response);
           this.getCards();
         }).catch(function (error) {
@@ -98,7 +94,7 @@
       selected(result) {
         console.log(result);
         var autocomplete = this.$refs.autocomplete;
-        axios.put('http://localhost:58990/api/inventory/' + result.value).then(response => {
+        axios.put(process.env.API_URL + '/api/inventory/' + result.value).then(response => {
           console.log(response);
           this.getCards();
           autocomplete.clearValues();
@@ -114,10 +110,13 @@
       },
       getCards() {
         this.cards = [];
-        axios.get('http://localhost:58990/api/inventory')
+        axios.get(process.env.API_URL + '/api/inventory')
           .then(response => {
-            for (var i = 0; i < response.data.length; i++)
-              this.cards.push(response.data[i]);
+            this.cardsCount = response.data.count;
+            this.cardsDistinctCount = response.data.distinctCount;
+
+            for (var i = 0; i < response.data.items.length; i++)
+              this.cards.push(response.data.items[i]);
           })
           .catch(function (error) {
             console.log(error);
@@ -126,7 +125,9 @@
     },
     data() {
       return {
-        cards: []
+        cards: [],
+        cardsCount: 0,
+        cardsDistinctCount: 0
       }
     }
   }

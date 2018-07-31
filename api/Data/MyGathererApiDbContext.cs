@@ -13,6 +13,12 @@ namespace my_gatherer_api.Data
         public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<CardItem> CardItems { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             base.OnModelCreating(modelBuilder);

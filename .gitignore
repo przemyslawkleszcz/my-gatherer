@@ -3,6 +3,9 @@ api/obj/
 web/dist/
 web/node_modules/
 
+api/appsettings.json
+api/appsettings.Development.json
+
 # Editor directories and files
 .idea
 .vs
@@ -11,4 +14,4 @@ web/node_modules/
 *.ntvs*
 *.njsproj
 *.sln
-api/appsettings.json
+

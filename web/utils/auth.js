@@ -8,7 +8,9 @@ const ACCESS_TOKEN_KEY = 'access_token';
 
 const CLIENT_ID = 'RncEWh3csyJC94wf4aD0z3dWQyKR9H1z';
 const CLIENT_DOMAIN = 'my-gatherer.eu.auth0.com';
-const REDIRECT = 'http://localhost:8080/callback';
+//const REDIRECT = 'http://localhost:8080/callback';
+const REDIRECT = 'http://mygathererweb.hostingasp.pl/callback';
+
 const SCOPE = 'full_access';
 const AUDIENCE = 'http://mygathererapi.com';
 
@@ -17,10 +19,10 @@ var auth = new auth0.WebAuth({
   domain: CLIENT_DOMAIN
 });
 
-export function login() {
+export function login(callback) {
   auth.authorize({
     responseType: 'token id_token',
-    redirectUri: REDIRECT,
+    redirectUri: callback,
     audience: AUDIENCE,
     scope: SCOPE
   });

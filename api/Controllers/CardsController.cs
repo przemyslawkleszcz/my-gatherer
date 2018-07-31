@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using MtgApiManager.Lib.Core;
 using MtgApiManager.Lib.Model;
 using MtgApiManager.Lib.Service;
+using Newtonsoft.Json;
 
 namespace my_gatherer_api.Controllers
 {
@@ -27,28 +28,30 @@ namespace my_gatherer_api.Controllers
         }
 
         [HttpGet]
-        public JsonResult Get(string set)
+        [ProducesResponseType(200, Type = typeof(int))]
+        public IActionResult Get(string set)
         {
             var service = new SetService();
             var setData = service.Find(set);
             var cards = _context.CardItems.Where(x => x.SetName == setData.Value.Name);
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId != null)
             {
                 var inventoryItems = _context.InventoryItems.Where(x => x.UserId == userId);
                 var data = from c in cards
-                            join i in inventoryItems on c.Id equals i.Id into ci
-                            from pos in ci.DefaultIfEmpty()
-                            select new CardItemViewData
-                            {
-                                Id = c.Id,
-                                Name = c.Name,
-                                ManaCost = c.ManaCost,
-                                ImageUrl = c.ImageUrl,
-                                InInventory = pos != null
-                            };
+                           join i in inventoryItems on c.Id equals i.Id into ci
+                           from pos in ci.DefaultIfEmpty()
+                           select new CardItemViewData
+                           {
+                               Id = c.Id,
+                               Name = c.Name,
+                               ManaCost = c.ManaCost,
+                               ImageUrl = c.ImageUrl,
+                               InInventory = pos != null
+                           };
 
-                var model = new CardItemViewModel {Items = data};
+                var model = new CardItemViewModel { Items = data };
                 return Json(model);
             }
             else

@@ -69,7 +69,7 @@
       selected(result) {
         this.cards = [];
 
-        axios.get('http://localhost:58990/api/cards?set=' + result.value)
+        axios.get(process.env.API_URL + '/api/cards?set=' + result.value)
           .then(response => {
             this.count = response.data.count;
             this.inInventory = response.data.inInventory;

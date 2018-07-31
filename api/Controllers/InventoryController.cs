@@ -30,7 +30,7 @@ namespace my_gatherer_api.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var inventoryItem = _context.InventoryItems.Include(x => x.CardItem).Where(x => x.UserId == userId);
 
-            var model = inventoryItem.Select(x => new InventoryItemViewModel
+            var data = inventoryItem.Select(x => new InventoryItemViewData
             {
                 Id = x.Id,
                 Quantity = x.Quantity,
@@ -40,6 +40,7 @@ namespace my_gatherer_api.Controllers
                 ImageUrl = x.CardItem.ImageUrl
             });
 
+            var model = new InventoryItemViewModel { Items = data };
             return Json(model);
         }
 

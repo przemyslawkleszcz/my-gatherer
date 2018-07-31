@@ -26,6 +26,11 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "my-gatherer", ".", "{40CBD9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "my-gatherer-api", "api\my-gatherer-api.csproj", "{233FD3EA-5819-4820-882B-87B20FEBABD9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{205F4EF7-B56B-493E-8D34-D29FAD34E373}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

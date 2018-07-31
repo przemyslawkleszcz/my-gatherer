@@ -86,7 +86,7 @@
     name: 'Normal',
     methods: {
       handleLogin() {
-        login();
+        login(process.env.AUTH_CALLBACK);
       },
       handleLogout() {
         logout();
