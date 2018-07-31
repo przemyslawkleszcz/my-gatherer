@@ -11,3 +11,4 @@ web/node_modules/
 *.ntvs*
 *.njsproj
 *.sln
+api/appsettings.json
