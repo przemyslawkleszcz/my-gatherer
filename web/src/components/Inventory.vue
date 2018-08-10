@@ -2,14 +2,15 @@
   <div>
     <h3>Inventory</h3>
     <span><i>Syntax: Card Name [Set name]</i></span>
-    <autocomplete :source="distributionGroupsEndpoint"
-                  ref="autocomplete"
-                  placeholder="Add cards"
-                  results-property="cards"
-                  :results-display="formattedDisplay"
-                  @selected="selected"
-                  style="width: 300px; height: 80px;">
-    </autocomplete>
+    <autocomplete-extended :source="searching"
+                           ref="autocomplete"
+                           placeholder="Add cards"
+                           results-property="cards"
+                           :results-display="formattedDisplay"
+                           @selected="selected"
+                           style="width: 300px; height: 80px;">
+
+    </autocomplete-extended>
     <div>Cards count: {{cardsCount}}</div>
     <div>Distinct count: {{cardsDistinctCount}}</div>
     <md-table>
@@ -61,9 +62,8 @@
 <script>
   import { isLoggedIn, login, logout, getAccessToken } from '../../utils/auth';
   import axios from 'axios';
-  const mtg = require('mtgsdk')
   import Mana from '@/components/Mana'
-  import Autocomplete from 'vuejs-auto-complete'
+  import AutocompleteExtended from '@/components/AutocompleteExtended'
 
   export default {
     name: 'Inventory',
@@ -73,7 +73,7 @@
     },
     components: {
       Mana,
-      Autocomplete
+      AutocompleteExtended
     },
     methods: {
       remove(id) {
@@ -94,19 +94,22 @@
         var input = autocomplete.$el.children[0].children[1].children[0];
         input.focus();
       },
-      distributionGroupsEndpoint(inputText) {
-        //modify here to prevent doing many requests
-        var url = "https://api.magicthegathering.io/v1/cards?name=";
-        var matches = inputText.match(/\[(.*?)\]/);
-        if (matches != null) {
-          inputText = inputText.replace(matches[0], "");
-          url += inputText.trim();
-          url += "&setName=" + matches[1];
-        }
-        else
-          url += inputText;
-
-        return url;
+      searching(inputText) {
+        return new Promise(resolve => {
+          clearTimeout(this.searchDelay);
+          this.searchDelay = setTimeout(() => {
+            var url = "https://api.magicthegathering.io/v1/cards?name=";
+            var matches = inputText.match(/\[(.*?)\]/);
+            if (matches != null) {
+              inputText = inputText.replace(matches[0], "");
+              url += inputText.trim();
+              url += "&setName=" + matches[1];
+            }
+            else
+              url += inputText;
+            resolve(url);
+          }, 500);
+        });
       },
       selected(result) {
         var autocomplete = this.$refs.autocomplete;
@@ -140,6 +143,7 @@
     },
     data() {
       return {
+        searchDelay: null,
         cards: [],
         cardsCount: 0,
         cardsDistinctCount: 0

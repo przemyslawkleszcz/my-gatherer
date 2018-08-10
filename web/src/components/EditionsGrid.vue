@@ -2,15 +2,15 @@
   <div>
     <div class="md-layout md-gutter">
       <div class="md-layout-item">
-        <autocomplete source="https://api.magicthegathering.io/v1/sets?name="
-                      ref="autocomplete"
-                      placeholder="Search sets"
-                      results-property="sets"
-                      results-display="name"
-                      resultsValue="code"
-                      @selected="selected"
-                      style="width: 300px; height: 80px;">
-        </autocomplete>
+        <autocomplete-extended :source="searching"
+                               ref="autocomplete"
+                               placeholder="Search sets"
+                               results-property="sets"
+                               results-display="name"
+                               resultsValue="code"
+                               @selected="selected"
+                               style="width: 300px; height: 80px;">
+        </autocomplete-extended>
         <span>In collection: <span style="color: #7ed875;">{{inInventory}}</span> / {{count}}</span>
       </div>
     </div>
@@ -50,7 +50,7 @@
   const mtg = require('mtgsdk')
   import axios from 'axios';
   import Mana from '@/components/Mana'
-  import Autocomplete from 'vuejs-auto-complete'
+  import AutocompleteExtended from '@/components/AutocompleteExtended'
   import { getAccessToken } from '../../utils/auth';
 
   export default {
@@ -60,7 +60,7 @@
     },
     components: {
       Mana,
-      Autocomplete
+      AutocompleteExtended
     },
     methods: {
       getCardTooltip(image) {
@@ -80,10 +80,20 @@
           .catch(function (error) {
             console.log(error);
           });
-      }
+      },
+      searching(inputText) {
+        return new Promise(resolve => {
+          clearTimeout(this.searchDelay);
+          this.searchDelay = setTimeout(() => {
+            var url = "https://api.magicthegathering.io/v1/sets?name=" + inputText;
+            resolve(url);
+          }, 500);
+        });
+      },
     },
     data() {
       return {
+        searchDelay: null,
         cards: [],
         count: 0,
         inInventory: 0
